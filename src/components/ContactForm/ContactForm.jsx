@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import contactsActions from '../../redux/contacts/contacts-actions';
-import { Form, Input, Label, Error, Button } from './ContactForm.styled';
 import { getContacts } from '../../redux/contacts/contacts-selectors';
+import { Form, Input, Label, Error, Button } from './ContactForm.styled';
 
 export default function ContactForm({ onClose }) {
   const contacts = useSelector(getContacts);
@@ -22,6 +22,7 @@ export default function ContactForm({ onClose }) {
       .required('Обязательное поле')
       .notOneOf(
         contacts.map(contact => contact.name),
+        // eslint-disable-next-line no-template-curly-in-string
         '${value} есть в контактах',
       )
       .matches(
