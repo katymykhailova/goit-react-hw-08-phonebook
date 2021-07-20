@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import contactsActions from '../../redux/contacts/contacts-actions';
 import { Label, FilterInput } from './Filter.styled';
 
-function Filter() {
+export default function Filter() {
   const onChange = useDispatch();
   return (
     <Label>
@@ -17,5 +17,3 @@ function Filter() {
     </Label>
   );
 }
-
-export default Filter;
