@@ -26,17 +26,17 @@ import actions from './contacts-actions';
 //   }
 // };
 
-const itemsReducer = createReducer([], {
+const items = createReducer([], {
   [actions.addContact]: (state, { type, payload }) => [payload, ...state],
   [actions.deleteContact]: (state, { type, payload }) =>
     state.filter(contact => contact.id !== payload),
 });
 
-const filterReducer = createReducer('', {
+const filter = createReducer('', {
   [actions.changeFilter]: (_, { payload }) => payload,
 });
 
 export default combineReducers({
-  items: itemsReducer,
-  filter: filterReducer,
+  items,
+  filter,
 });

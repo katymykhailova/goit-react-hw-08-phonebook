@@ -11,7 +11,7 @@ import Modal from './components/Modal';
 import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
 
-import initialContacts from 'data/contacts.json';
+// import initialContacts from 'data/contacts.json';
 
 export default function App() {
   // const [contacts, setContacts] = useState(() => {
