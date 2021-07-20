@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import contactsActions from '../../redux/contacts/contacts-actions';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
 
-function ContactForm({ contacts, onSubmit, onClose }) {
+export default function ContactForm({ onClose }) {
+  const contacts = useSelector(state => state.contacts.items);
+  const onSubmit = useDispatch();
+
   const onhandleSubmit = data => {
-    onSubmit(data);
+    onSubmit(contactsActions.addContact(data));
     onClose();
   };
+
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -55,18 +59,3 @@ function ContactForm({ contacts, onSubmit, onClose }) {
     </Form>
   );
 }
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func,
-  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: value => dispatch(contactsActions.addContact(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
