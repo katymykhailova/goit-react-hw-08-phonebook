@@ -1,9 +1,6 @@
-// import { createStore, combineReducers } from 'redux';
-// import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
-// import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   persistStore,
   persistReducer,
@@ -16,11 +13,6 @@ import {
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
 
-// const rootReducer = combineReducers({
-//   contacts: contactsReducer,
-// });
-
-// const store = createStore(rootReducer, composeWithDevTools());
 const contactsPersistConfig = {
   key: 'contacts',
   storage,
