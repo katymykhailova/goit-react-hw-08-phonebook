@@ -5,12 +5,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import contactsActions from '../../redux/contacts/contacts-actions';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
 
 export default function ContactForm({ onClose }) {
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getContacts);
   const onSubmit = useDispatch();
 
-  const onhandleSubmit = data => {
+  const onHandleSubmit = data => {
     onSubmit(contactsActions.addContact(data));
     onClose();
   };
@@ -45,7 +46,7 @@ export default function ContactForm({ onClose }) {
   });
 
   return (
-    <Form onSubmit={handleSubmit(onhandleSubmit)}>
+    <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         Name
         <Input type="text" {...register('name')} />
@@ -59,3 +60,7 @@ export default function ContactForm({ onClose }) {
     </Form>
   );
 }
+
+ContactForm.propTypes = {
+  onClose: PropTypes.func,
+};
