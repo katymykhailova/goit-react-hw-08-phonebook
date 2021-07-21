@@ -35,8 +35,8 @@ export default function App() {
       <ContactList />
 
       {openedModal === 'newContact' && (
-        <Modal onClose={toggleModal}>
-          <ContactForm onClose={toggleModal} />
+        <Modal>
+          <ContactForm />
         </Modal>
       )}
     </Section>
