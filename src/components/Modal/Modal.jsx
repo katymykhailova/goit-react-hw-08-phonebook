@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-
+import { useDispatch } from 'react-redux';
+import modalActions from '../../redux/modal/modal-actions';
 import { ModalBackdrop, ModalContent } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ children, onClose }) {
+export default function Modal({ children }) {
+  const onClose = useDispatch();
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -16,13 +19,13 @@ export default function Modal({ children, onClose }) {
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {
-      onClose();
+      onClose(modalActions.closeModal());
     }
   };
 
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
-      onClose();
+      onClose(modalActions.closeModal());
     }
   };
 

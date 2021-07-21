@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { FiPhone, FiTrash2 } from 'react-icons/fi';
 import Button from '../Button';
-
 import { ContactsText } from './Contact.styled';
 import { iconSize } from 'constants/index';
 
@@ -12,7 +11,7 @@ function Contact({ name, number, onDeleteContact }) {
         <FiPhone size={iconSize.small} />
         {name}: {number}
       </ContactsText>
-      <Button type="button" onClick={onDeleteContact} aria-label="add contact">
+      <Button type="button" onClick={onDeleteContact} aria-label="del contact">
         <FiTrash2 size={iconSize.small} />
       </Button>
     </>

@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
+import modalReducer from './modal/modal-reducer';
 
 const contactsPersistConfig = {
   key: 'contacts',
@@ -22,6 +23,7 @@ const contactsPersistConfig = {
 const store = configureStore({
   reducer: {
     contacts: persistReducer(contactsPersistConfig, contactsReducer),
+    modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
