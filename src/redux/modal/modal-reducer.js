@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './modal-actions';
 
-const isOpen = createReducer(false, {
-  [actions.openModal]: (_, { payload }) => true,
-  [actions.closeModal]: (_, { payload }) => false,
+const type = createReducer('none', {
+  [actions.openModal]: (_, { payload }) => payload,
+  [actions.closeModal]: (_, { payload }) => 'none',
 });
 
 export default combineReducers({
-  isOpen,
+  type,
 });

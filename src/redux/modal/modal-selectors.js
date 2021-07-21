@@ -1,1 +1,1 @@
-export const getShowModal = state => state.modal.isOpen;
+export const getOpenedModal = state => state.modal.type;

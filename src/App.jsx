@@ -8,11 +8,11 @@ import Button from 'components/Button';
 import Modal from './components/Modal';
 import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
-import { getShowModal } from './redux/modal/modal-selectors';
+import { getOpenedModal } from './redux/modal/modal-selectors';
 import modalActions from './redux/modal/modal-actions';
 
 export default function App() {
-  const showModal = useSelector(getShowModal);
+  const openedModal = useSelector(getOpenedModal);
   const toggleModal = useDispatch();
 
   return (
@@ -23,7 +23,7 @@ export default function App() {
         <Filter />
         <Button
           type="button"
-          onClick={() => toggleModal(modalActions.openModal())}
+          onClick={() => toggleModal(modalActions.openModal('newContact'))}
           aria-label="add contact"
         >
           <FiUserPlus size={iconSize.small} />
@@ -34,7 +34,7 @@ export default function App() {
 
       <ContactList />
 
-      {showModal && (
+      {openedModal === 'newContact' && (
         <Modal onClose={toggleModal}>
           <ContactForm onClose={toggleModal} />
         </Modal>
