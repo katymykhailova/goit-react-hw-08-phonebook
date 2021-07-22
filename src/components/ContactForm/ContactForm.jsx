@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import contactsActions from '../../redux/contacts/contacts-actions';
-import modalActions from '../../redux/modal/modal-actions';
+// import modalActions from '../../redux/modal/modal-actions';
 
 import { getContacts } from '../../redux/contacts/contacts-selectors';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
@@ -12,12 +12,12 @@ import { Form, Input, Label, Error, Button } from './ContactForm.styled';
 export default function ContactForm() {
   const contacts = useSelector(getContacts);
   const onSubmit = useDispatch();
-  const onClose = useDispatch();
+  // const onClose = useDispatch();
 
-  const onHandleSubmit = data => {
-    onSubmit(contactsActions.addContact(data));
-    onClose(modalActions.closeModal());
-  };
+  // const onHandleSubmit = data => {
+  //   onSubmit(contactsActions.addContact(data));
+  //   onClose(modalActions.closeModal());
+  // };
 
   const schema = yup.object().shape({
     name: yup
@@ -50,7 +50,11 @@ export default function ContactForm() {
   });
 
   return (
-    <Form onSubmit={handleSubmit(onHandleSubmit)}>
+    <Form
+      onSubmit={handleSubmit(data => {
+        onSubmit(contactsActions.newContact(data));
+      })}
+    >
       <Label>
         Name
         <Input type="text" {...register('name')} />
