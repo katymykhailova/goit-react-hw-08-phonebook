@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiUserPlus } from 'react-icons/fi';
 import Section from 'components/Section';
@@ -10,10 +11,15 @@ import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
 import { getOpenedModal } from './redux/modal/modal-selectors';
 import modalActions from './redux/modal/modal-actions';
+import todosOperations from './redux/contacts/contacts-operations';
+import { getLoading } from './redux/contacts/contacts-selectors';
 
 export default function App() {
   const openedModal = useSelector(getOpenedModal);
-  const toggleModal = useDispatch();
+  const isLoadingTodos = useSelector(getLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(todosOperations.fetchContacts()), [dispatch]);
 
   return (
     <Section>
@@ -23,7 +29,7 @@ export default function App() {
         <Filter />
         <Button
           type="button"
-          onClick={() => toggleModal(modalActions.openModal('newContact'))}
+          onClick={() => dispatch(modalActions.openModal('newContact'))}
           aria-label="add contact"
         >
           <FiUserPlus size={iconSize.small} />
@@ -31,6 +37,7 @@ export default function App() {
       </ContainerFilter>
 
       <h2>Contacts</h2>
+      {isLoadingTodos && <h3>Загружаем...</h3>}
 
       <ContactList />
 

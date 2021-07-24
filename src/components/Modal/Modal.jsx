@@ -8,7 +8,7 @@ import { ModalBackdrop, ModalContent } from './Modal.styled';
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ children }) {
-  const onClose = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -19,13 +19,13 @@ export default function Modal({ children }) {
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {
-      onClose(modalActions.closeModal());
+      dispatch(modalActions.closeModal());
     }
   };
 
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
-      onClose(modalActions.closeModal());
+      dispatch(modalActions.closeModal());
     }
   };
 
