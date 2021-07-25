@@ -1,1 +1,1 @@
-export const getOpenedModal = state => state.modal.type;
+export const getOpenedModal = state => state.modal;

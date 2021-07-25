@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import modalActions from '../../redux/modal/modal-actions';
+// import modalActions from '../../redux/modal/modal-actions';
+import { closeModal } from '../../redux/modal/modal-reducer';
 import { ModalBackdrop, ModalContent } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
@@ -19,13 +20,13 @@ export default function Modal({ children }) {
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {
-      dispatch(modalActions.closeModal());
+      dispatch(closeModal());
     }
   };
 
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
-      dispatch(modalActions.closeModal());
+      dispatch(closeModal());
     }
   };
 

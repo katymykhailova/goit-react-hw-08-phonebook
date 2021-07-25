@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { contactsOperations } from '../../redux/contacts';
-import modalActions from '../../redux/modal/modal-actions';
+// import modalActions from '../../redux/modal/modal-actions';
+import { closeModal } from '../../redux/modal/modal-reducer';
 
 import { getContacts } from '../../redux/contacts/contacts-selectors';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
@@ -14,7 +15,8 @@ export default function ContactForm() {
 
   const onHandleSubmit = data => {
     dispatch(contactsOperations.addContact(data));
-    dispatch(modalActions.closeModal());
+    // dispatch(modalActions.closeModal());
+    dispatch(closeModal());
   };
 
   const schema = yup.object().shape({
