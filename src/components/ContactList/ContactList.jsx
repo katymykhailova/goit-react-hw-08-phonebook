@@ -9,16 +9,22 @@ export default function ContactList() {
   const dispatch = useDispatch();
 
   return (
-    <Contacts>
-      {contacts.map(({ id, name, number }) => (
-        <ContactsItem key={id}>
-          <Contact
-            name={name}
-            number={number}
-            onDeleteContact={() => dispatch(todosOperations.deleteContact(id))}
-          />
-        </ContactsItem>
-      ))}
-    </Contacts>
+    <>
+      {contacts.length > 0 && (
+        <Contacts>
+          {contacts.map(({ id, name, number }) => (
+            <ContactsItem key={id}>
+              <Contact
+                name={name}
+                number={number}
+                onDeleteContact={() =>
+                  dispatch(todosOperations.deleteContact(id))
+                }
+              />
+            </ContactsItem>
+          ))}
+        </Contacts>
+      )}
+    </>
   );
 }
