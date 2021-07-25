@@ -10,10 +10,7 @@ import Modal from './components/Modal';
 import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
 import { getOpenedModal } from './redux/modal/modal-selectors';
-// import modalActions from './redux/modal/modal-actions';
 import { openModal } from './redux/modal/modal-reducer';
-// import contactsOperations from './redux/contacts/contacts-operations';
-// import { getLoading } from './redux/contacts/contacts-selectors';
 import { contactsOperations, contactsSelectors } from './redux/contacts';
 
 export default function App() {

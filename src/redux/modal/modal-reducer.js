@@ -1,16 +1,4 @@
-// import { combineReducers } from 'redux';
-// import { createReducer } from '@reduxjs/toolkit';
-// import actions from './modal-actions';
 import { createSlice } from '@reduxjs/toolkit';
-
-// const type = createReducer('none', {
-//   [actions.openModal]: (_, { payload }) => payload,
-//   [actions.closeModal]: (_, { payload }) => 'none',
-// });
-
-// export default combineReducers({
-//   type,
-// });
 
 const counterSlice = createSlice({
   name: 'modal',
