@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Contact from '../Contact';
-import todosOperations from '../../redux/contacts/contacts-operations';
-import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+// import contactsOperations from '../../redux/contacts/contacts-operations';
+// import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+import { contactsOperations, contactsSelectors } from '../../redux/contacts';
 import { Contacts, ContactsItem } from './ContactList.styled';
 
 export default function ContactList() {
-  const contacts = useSelector(getVisibleContacts);
+  const contacts = useSelector(contactsSelectors.getVisibleContacts);
   const dispatch = useDispatch();
 
   return (
@@ -18,7 +19,7 @@ export default function ContactList() {
                 name={name}
                 number={number}
                 onDeleteContact={() =>
-                  dispatch(todosOperations.deleteContact(id))
+                  dispatch(contactsOperations.deleteContact(id))
                 }
               />
             </ContactsItem>

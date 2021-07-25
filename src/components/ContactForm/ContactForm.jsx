@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import todosOperations from '../../redux/contacts/contacts-operations';
+import { contactsOperations } from '../../redux/contacts';
 import modalActions from '../../redux/modal/modal-actions';
 
 import { getContacts } from '../../redux/contacts/contacts-selectors';
@@ -13,7 +13,7 @@ export default function ContactForm() {
   const dispatch = useDispatch();
 
   const onHandleSubmit = data => {
-    dispatch(todosOperations.addContact(data));
+    dispatch(contactsOperations.addContact(data));
     dispatch(modalActions.closeModal());
   };
 

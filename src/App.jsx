@@ -11,15 +11,16 @@ import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
 import { getOpenedModal } from './redux/modal/modal-selectors';
 import modalActions from './redux/modal/modal-actions';
-import todosOperations from './redux/contacts/contacts-operations';
-import { getLoading } from './redux/contacts/contacts-selectors';
+// import contactsOperations from './redux/contacts/contacts-operations';
+// import { getLoading } from './redux/contacts/contacts-selectors';
+import { contactsOperations, contactsSelectors } from './redux/contacts';
 
 export default function App() {
   const openedModal = useSelector(getOpenedModal);
-  const isLoadingTodos = useSelector(getLoading);
+  const isLoadingContacts = useSelector(contactsSelectors.getLoading);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(todosOperations.fetchContacts()), [dispatch]);
+  useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (
     <Section>
@@ -37,7 +38,7 @@ export default function App() {
       </ContainerFilter>
 
       <h2>Contacts</h2>
-      {isLoadingTodos && <h3>Загружаем...</h3>}
+      {isLoadingContacts && <h3>Загружаем...</h3>}
 
       <ContactList />
 
