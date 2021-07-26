@@ -12,8 +12,10 @@ const theme = {
     white: '#ffffff',
     blue: '#2196f3',
     accentBlue: '#1e81d3',
-    grey: '#e1dfdf',
-    disabledBlue: '#7fbff3',
+    grey: '#9b9b9b',
+    accentGrey: '#878787',
+    disabledGrey: '#bebebe',
+    disabledGlue: '#7fbff3',
   },
 };
 

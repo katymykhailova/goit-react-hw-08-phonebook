@@ -16,7 +16,7 @@ export const Input = styled.input`
   height: 30px;
   padding-left: 15px;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.blue};
+  border: 1px solid ${({ theme }) => theme.colors.grey};
   border-radius: 4px;
 `;
 
@@ -33,7 +33,7 @@ export const Button = styled.button`
   text-align: center;
   letter-spacing: 0.06em;
   text-decoration: none;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.grey};
   color: #fff;
   border: 0;
   border-radius: 4px;
@@ -41,11 +41,11 @@ export const Button = styled.button`
 
   &:disabled,
   &:disabled:hover {
-    background-color: ${({ theme }) => theme.colors.disabledBlue};
+    background-color: ${({ theme }) => theme.colors.disabledGrey};
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.accentBlue};
+    background-color: ${({ theme }) => theme.colors.accentGrey};
   }
 `;
 

@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types';
-import { FiPhone, FiTrash2 } from 'react-icons/fi';
+import { FiPhone, FiTrash2, FiEdit } from 'react-icons/fi';
 import Button from '../Button';
-import { ContactsText } from './Contact.styled';
+import { ContactsText, Name, Number } from './Contact.styled';
 import { iconSize } from 'constants/index';
 
-function Contact({ name, number, onDeleteContact, onChangeContact }) {
+function Contact({ name, number, onDeleteContact, onEditContact }) {
   return (
     <>
-      <ContactsText onClick={onChangeContact}>
+      <ContactsText>
         <FiPhone size={iconSize.small} />
-        {name}: {number}
+        <Name>{name}</Name> <Number>{number}</Number>
       </ContactsText>
+      <Button type="button" onClick={onEditContact} aria-label="edit contact">
+        <FiEdit size={iconSize.small} />
+      </Button>
       <Button type="button" onClick={onDeleteContact} aria-label="del contact">
         <FiTrash2 size={iconSize.small} />
       </Button>

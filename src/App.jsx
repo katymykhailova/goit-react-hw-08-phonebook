@@ -43,7 +43,7 @@ export default function App() {
       </ContainerFilter>
 
       <h2>Contacts</h2>
-      {isLoadingContacts && <h3>Загружаем...</h3>}
+      {isLoadingContacts && <h3>loading...</h3>}
 
       <ContactList />
 

@@ -18,7 +18,9 @@ export default function ContactForm() {
   const [contact, setContact] = useState({});
 
   useEffect(() => {
-    contactsAPI.fetchContactById(contactId).then(setContact);
+    if (contactId) {
+      contactsAPI.fetchContactById(contactId).then(setContact);
+    }
   }, [contactId]);
 
   const onHandleSubmit = data => {
@@ -57,26 +59,30 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isDirty },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    if (contact) {
+      for (const [key, value] of Object.entries(contact)) {
+        setValue(key, value, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+      }
+    }
+  }, [contact, setValue]);
+
   return (
     <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         Name
-        <Input
-          type="text"
-          {...register('name')}
-          defaultValue={openedModal === 'contact' ? contact.name : ''}
-        />
+        <Input type="text" {...register('name')} />
         <Error>{errors.name?.message}</Error>
-        <Input
-          type="tel"
-          {...register('number')}
-          defaultValue={openedModal === 'contact' ? contact.number : ''}
-        />
+        <Input type="tel" {...register('number')} />
         <Error>{errors.number?.message}</Error>
       </Label>
       <Button type="submit" disabled={!isDirty}>

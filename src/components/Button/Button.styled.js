@@ -9,7 +9,7 @@ export const IconButton = styled.button`
 
   text-align: center;
   letter-spacing: 0.06em;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.grey};
   color: ${({ theme }) => theme.colors.white};
   border: 0;
   border-radius: 50%;
@@ -21,6 +21,6 @@ export const IconButton = styled.button`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.accentBlue};
+    background-color: ${({ theme }) => theme.colors.accentGrey};
   }
 `;

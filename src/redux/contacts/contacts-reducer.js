@@ -6,7 +6,6 @@ import {
   fetchContacts,
   addContact,
   deleteContact,
-  fetchContactById,
   changeContact,
 } from './contacts-operations';
 
@@ -50,9 +49,10 @@ const currentContact = createReducer(
   //   [fetchContactById.fulfilled]: (_, { payload }) => payload,
   //   [fetchContactById.rejected]: () => ({}),
   // },
-  '', {
+  '',
+  {
     [changecurrentContact]: (_, { payload }) => payload,
-  }
+  },
 );
 
 export default combineReducers({

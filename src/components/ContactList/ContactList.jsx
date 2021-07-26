@@ -25,7 +25,7 @@ export default function ContactList() {
               <Contact
                 name={name}
                 number={number}
-                onChangeContact={() => onHandleClick(id)}
+                onEditContact={() => onHandleClick(id)}
                 onDeleteContact={() =>
                   dispatch(contactsOperations.deleteContact(id))
                 }
