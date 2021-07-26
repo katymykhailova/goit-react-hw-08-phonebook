@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import * as contactsActions from '../../redux/contacts/contacts-actions';
+import { contactsActions } from '../../redux/contacts';
 import { Label, FilterInput } from './Filter.styled';
 
 export default function Filter() {

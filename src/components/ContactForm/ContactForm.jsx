@@ -1,19 +1,32 @@
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { contactsOperations } from '../../redux/contacts';
+import { contactsOperations, contactsSelectors } from '../../redux/contacts';
+import { getOpenedModal } from '../../redux/modal/modal-selectors';
 import { closeModal } from '../../redux/modal/modal-reducer';
-
-import { getContacts } from '../../redux/contacts/contacts-selectors';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
+import * as contactsAPI from '../../services/contactsApiService';
 
 export default function ContactForm() {
-  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
+  const openedModal = useSelector(getOpenedModal);
+  const contacts = useSelector(contactsSelectors.getContacts);
+  const contactId = useSelector(contactsSelectors.getCurrentContact);
+
+  const [contact, setContact] = useState({});
+
+  useEffect(() => {
+    contactsAPI.fetchContactById(contactId).then(setContact);
+  }, [contactId]);
 
   const onHandleSubmit = data => {
-    dispatch(contactsOperations.addContact(data));
+    dispatch(
+      openedModal === 'contact'
+        ? contactsOperations.changeContact({ id: contact.id, ...data })
+        : contactsOperations.addContact(data),
+    );
     dispatch(closeModal());
   };
 
@@ -22,7 +35,9 @@ export default function ContactForm() {
       .string()
       .required('Обязательное поле')
       .notOneOf(
-        contacts.map(contact => contact.name),
+        contacts
+          .filter(({ id }) => id !== contactId)
+          .map(contact => contact.name),
         // eslint-disable-next-line no-template-curly-in-string
         '${value} есть в контактах',
       )
@@ -51,13 +66,21 @@ export default function ContactForm() {
     <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         Name
-        <Input type="text" {...register('name')} />
+        <Input
+          type="text"
+          {...register('name')}
+          defaultValue={openedModal === 'contact' ? contact.name : ''}
+        />
         <Error>{errors.name?.message}</Error>
-        <Input type="tel" {...register('number')} />
+        <Input
+          type="tel"
+          {...register('number')}
+          defaultValue={openedModal === 'contact' ? contact.number : ''}
+        />
         <Error>{errors.number?.message}</Error>
       </Label>
       <Button type="submit" disabled={!isDirty}>
-        Add contacts
+        {openedModal === 'contact' ? 'Save contact' : 'Add contacts'}
       </Button>
     </Form>
   );

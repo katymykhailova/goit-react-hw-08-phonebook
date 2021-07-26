@@ -4,10 +4,10 @@ import Button from '../Button';
 import { ContactsText } from './Contact.styled';
 import { iconSize } from 'constants/index';
 
-function Contact({ name, number, onDeleteContact }) {
+function Contact({ name, number, onDeleteContact, onChangeContact }) {
   return (
     <>
-      <ContactsText>
+      <ContactsText onClick={onChangeContact}>
         <FiPhone size={iconSize.small} />
         {name}: {number}
       </ContactsText>

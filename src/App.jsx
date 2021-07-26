@@ -11,7 +11,11 @@ import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
 import { getOpenedModal } from './redux/modal/modal-selectors';
 import { openModal } from './redux/modal/modal-reducer';
-import { contactsOperations, contactsSelectors } from './redux/contacts';
+import {
+  contactsOperations,
+  contactsSelectors,
+  contactsActions,
+} from './redux/contacts';
 
 export default function App() {
   const openedModal = useSelector(getOpenedModal);
@@ -28,7 +32,10 @@ export default function App() {
         <Filter />
         <Button
           type="button"
-          onClick={() => dispatch(openModal('newContact'))}
+          onClick={() => {
+            dispatch(contactsActions.changecurrentContact(''));
+            dispatch(openModal('newContact'));
+          }}
           aria-label="add contact"
         >
           <FiUserPlus size={iconSize.small} />
@@ -41,6 +48,11 @@ export default function App() {
       <ContactList />
 
       {openedModal === 'newContact' && (
+        <Modal>
+          <ContactForm />
+        </Modal>
+      )}
+      {openedModal === 'contact' && (
         <Modal>
           <ContactForm />
         </Modal>
