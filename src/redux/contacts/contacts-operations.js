@@ -15,18 +15,6 @@ export const fetchContacts = createAsyncThunk(
   },
 );
 
-// export const fetchContactById = createAsyncThunk(
-//   'contacts/fetchContactById',
-//   async (id, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get(`/contacts/${Number(id)}`);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   },
-// );
-
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, { rejectWithValue }) => {
@@ -64,3 +52,15 @@ export const changeContact = createAsyncThunk(
     }
   },
 );
+
+// export const fetchContactById = createAsyncThunk(
+//   'contacts/fetchContactById',
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(`/contacts/${Number(id)}`);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   },
+// );

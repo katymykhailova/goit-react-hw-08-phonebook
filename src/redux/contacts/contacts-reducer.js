@@ -43,17 +43,9 @@ const filter = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
 });
 
-const currentContact = createReducer(
-  // {},
-  // {
-  //   [fetchContactById.fulfilled]: (_, { payload }) => payload,
-  //   [fetchContactById.rejected]: () => ({}),
-  // },
-  '',
-  {
-    [changecurrentContact]: (_, { payload }) => payload,
-  },
-);
+const currentContact = createReducer('', {
+  [changecurrentContact]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
   items,
