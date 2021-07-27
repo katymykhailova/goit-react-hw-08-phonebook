@@ -9,7 +9,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
-import modalReducer from './modal/modal-reducer';
+import modalReducer from './modal/modal-slice';
 
 const store = configureStore({
   reducer: {
@@ -24,6 +24,7 @@ const store = configureStore({
     }).concat(logger),
   devTools: process.env.NODE_ENV === 'development',
 });
+
 
 // const persistor = persistStore(store);
 export default store;
