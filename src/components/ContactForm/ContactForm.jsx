@@ -79,9 +79,9 @@ export default function ContactForm() {
     <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         Name
-        <Input type="text" {...register('name')} />
+        <Input type="text" autoComplete="off" {...register('name')} />
         <Error>{errors.name?.message}</Error>
-        <Input type="tel" {...register('number')} />
+        <Input type="tel" autoComplete="off" {...register('number')} />
         <Error>{errors.number?.message}</Error>
       </Label>
       <Button type="submit" disabled={!isDirty}>
