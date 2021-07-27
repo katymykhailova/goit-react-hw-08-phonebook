@@ -15,18 +15,18 @@ export default function ContactForm() {
   const contacts = useSelector(contactsSelectors.getContacts);
   const contactId = useSelector(contactsSelectors.getCurrentContact);
 
-  const [contact, setContact] = useState({});
+  // const [contact, setContact] = useState({});
 
-  useEffect(() => {
-    if (contactId) {
-      contactsAPI.fetchContactById(contactId).then(setContact);
-    }
-  }, [contactId]);
+  // useEffect(() => {
+  //   if (contactId) {
+  //     contactsAPI.fetchContactById(contactId).then(setContact);
+  //   }
+  // }, [contactId]);
 
   const onHandleSubmit = data => {
     dispatch(
       openedModal === 'contact'
-        ? contactsOperations.changeContact({ id: contact.id, ...data })
+        ? contactsOperations.changeContact({ id: contactId, ...data })
         : contactsOperations.addContact(data),
     );
     dispatch(closeModal());
@@ -66,15 +66,32 @@ export default function ContactForm() {
   });
 
   useEffect(() => {
-    if (contact) {
-      for (const [key, value] of Object.entries(contact)) {
-        setValue(key, value, {
-          shouldValidate: true,
-          shouldDirty: true,
-        });
-      }
+    async function fetchContact(contactId) {
+      try {
+        const contact = await contactsAPI.fetchContactById(contactId);
+        if (contact) {
+          for (const [key, value] of Object.entries(contact)) {
+            setValue(key, value, {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+          }
+        }
+      } catch (error) {}
     }
-  }, [contact, setValue]);
+    if (contactId) {
+      fetchContact(contactId);
+    }
+
+    // if (contact) {
+    //   for (const [key, value] of Object.entries(contact)) {
+    //     setValue(key, value, {
+    //       shouldValidate: true,
+    //       shouldDirty: true,
+    //     });
+    //   }
+    // }
+  }, [contactId, setValue]);
 
   return (
     <Form onSubmit={handleSubmit(onHandleSubmit)}>
