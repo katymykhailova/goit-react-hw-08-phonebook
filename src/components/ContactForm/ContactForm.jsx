@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,14 +14,6 @@ export default function ContactForm() {
   const openedModal = useSelector(getOpenedModal);
   const contacts = useSelector(contactsSelectors.getContacts);
   const contactId = useSelector(contactsSelectors.getCurrentContact);
-
-  // const [contact, setContact] = useState({});
-
-  // useEffect(() => {
-  //   if (contactId) {
-  //     contactsAPI.fetchContactById(contactId).then(setContact);
-  //   }
-  // }, [contactId]);
 
   const onHandleSubmit = data => {
     dispatch(
@@ -82,15 +74,6 @@ export default function ContactForm() {
     if (contactId) {
       fetchContact(contactId);
     }
-
-    // if (contact) {
-    //   for (const [key, value] of Object.entries(contact)) {
-    //     setValue(key, value, {
-    //       shouldValidate: true,
-    //       shouldDirty: true,
-    //     });
-    //   }
-    // }
   }, [contactId, setValue]);
 
   return (
