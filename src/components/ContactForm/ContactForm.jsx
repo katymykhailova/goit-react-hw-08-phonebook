@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
 import { modalSelectors, modalActions } from '../../redux/modal';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
-import * as contactsAPI from '../../services/contactsApiService';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -57,23 +56,18 @@ export default function ContactForm() {
   });
 
   useEffect(() => {
-    async function fetchContact(contactId) {
-      try {
-        const contact = await contactsAPI.fetchContactById(contactId);
-        if (contact) {
-          for (const [key, value] of Object.entries(contact)) {
-            setValue(key, value, {
-              shouldValidate: true,
-              shouldDirty: true,
-            });
-          }
-        }
-      } catch (error) {}
-    }
     if (contactId) {
-      fetchContact(contactId);
+      const contact = contacts.find(contact => contact.id === contactId);
+      if (contact) {
+        for (const [key, value] of Object.entries(contact)) {
+          setValue(key, value, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+        }
+      }
     }
-  }, [contactId, setValue]);
+  }, [contactId, contacts, setValue]);
 
   return (
     <Form onSubmit={handleSubmit(onHandleSubmit)}>
