@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
-import { getOpenedModal } from '../../redux/modal/modal-selectors';
-import { closeModal } from '../../redux/modal/modal-reducer';
+import { modalSelectors, modalActions } from '../../redux/modal';
 import { Form, Input, Label, Error, Button } from './ContactForm.styled';
 import * as contactsAPI from '../../services/contactsApiService';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
-  const openedModal = useSelector(getOpenedModal);
+  const openedModal = useSelector(modalSelectors.getOpenedModal);
   const contacts = useSelector(contactsSelectors.getContacts);
   const contactId = useSelector(contactsSelectors.getCurrentContact);
 
@@ -21,7 +20,7 @@ export default function ContactForm() {
         ? contactsOperations.changeContact({ id: contactId, ...data })
         : contactsOperations.addContact(data),
     );
-    dispatch(closeModal());
+    dispatch(modalActions.closeModal());
   };
 
   const schema = yup.object().shape({

@@ -9,8 +9,7 @@ import Button from 'components/Button';
 import Modal from './components/Modal';
 import ContainerFilter from './components/ContainerFilter';
 import { iconSize } from 'constants/index';
-import { getOpenedModal } from './redux/modal/modal-selectors';
-import { openModal } from './redux/modal/modal-reducer';
+import { modalSelectors, modalActions } from './redux/modal';
 import {
   contactsOperations,
   contactsSelectors,
@@ -18,7 +17,7 @@ import {
 } from './redux/contacts';
 
 export default function App() {
-  const openedModal = useSelector(getOpenedModal);
+  const openedModal = useSelector(modalSelectors.getOpenedModal);
   const isLoadingContacts = useSelector(contactsSelectors.getLoading);
   const dispatch = useDispatch();
 
@@ -34,7 +33,7 @@ export default function App() {
           type="button"
           onClick={() => {
             dispatch(contactsActions.changecurrentContact(''));
-            dispatch(openModal('newContact'));
+            dispatch(modalActions.openModal('newContact'));
           }}
           aria-label="add contact"
         >

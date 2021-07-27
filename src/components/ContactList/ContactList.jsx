@@ -5,7 +5,7 @@ import {
   contactsSelectors,
   contactsActions,
 } from '../../redux/contacts';
-import { openModal } from '../../redux/modal/modal-reducer';
+import { modalActions } from '../../redux/modal';
 import { Contacts, ContactsItem } from './ContactList.styled';
 
 export default function ContactList() {
@@ -13,7 +13,7 @@ export default function ContactList() {
   const dispatch = useDispatch();
   const onHandleClick = id => {
     dispatch(contactsActions.changecurrentContact(id));
-    dispatch(openModal('contact'));
+    dispatch(modalActions.openModal('contact'));
   };
 
   return (
