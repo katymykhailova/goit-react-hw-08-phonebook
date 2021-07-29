@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@emotion/react';
 import store from 'redux/store';
@@ -24,7 +25,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         {/* <PersistGate loading={null} persistor={store.persistor}> */}
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
         {/* </PersistGate> */}
       </Provider>
     </ThemeProvider>

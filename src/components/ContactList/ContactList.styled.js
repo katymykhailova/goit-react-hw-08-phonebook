@@ -15,6 +15,8 @@ export const ContactsItem = styled.li`
   justify-items: baseline;
   justify-content: space-between;
   /* margin-bottom: 10px; */
-  padding: 10px 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid ${({ theme }) => theme.colors.grey};
 `;

@@ -2,8 +2,8 @@ import { DebounceInput } from 'react-debounce-input';
 import styled from '@emotion/styled/macro';
 
 export const Label = styled.label`
-  /* max-width: 400px; */
   width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
 `;
