@@ -1,9 +1,17 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { authOperations } from '../../redux/auth';
 import { Form, Input, Label, Error, Button } from './LoginForm.styled';
 
 export default function RegisteForm() {
+  const dispatch = useDispatch();
+
+  const onHandleSubmit = data => {
+    dispatch(authOperations.logIn(data));
+  };
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -29,7 +37,7 @@ export default function RegisteForm() {
   });
 
   return (
-    <Form onSubmit={handleSubmit()}>
+    <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         e-mail
         <Input type="email" {...register('email')} />

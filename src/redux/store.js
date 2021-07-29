@@ -10,11 +10,13 @@ import {
 } from 'redux-persist';
 import contactsReducer from './contacts/contacts-reducer';
 import modalReducer from './modal/modal-slice';
+import authReducer from './auth/auth-slice';
 
 const store = configureStore({
   reducer: {
     contacts: contactsReducer,
     modal: modalReducer,
+    auth: authReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -24,7 +26,6 @@ const store = configureStore({
     }).concat(logger),
   devTools: process.env.NODE_ENV === 'development',
 });
-
 
 // const persistor = persistStore(store);
 export default store;

@@ -1,20 +1,22 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { authOperations } from '../../redux/auth';
+
 import { Form, Input, Label, Error, Button } from './RegisterForm.styled';
 
 export default function RegisteForm() {
+  const dispatch = useDispatch();
+
+  const onHandleSubmit = data => {
+    dispatch(authOperations.register(data));
+  };
+
   const schema = yup.object().shape({
     name: yup
       .string()
       .required('Обязательное поле')
-      // .notOneOf(
-      //   contacts
-      //     .filter(({ id }) => id !== contactId)
-      //     .map(contact => contact.name),
-      //   // eslint-disable-next-line no-template-curly-in-string
-      //   '${value} есть в контактах',
-      // )
       .matches(
         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
         "Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п.",
@@ -43,7 +45,7 @@ export default function RegisteForm() {
   });
 
   return (
-    <Form onSubmit={handleSubmit()}>
+    <Form onSubmit={handleSubmit(onHandleSubmit)}>
       <Label>
         Name
         <Input type="text" {...register('name')} />

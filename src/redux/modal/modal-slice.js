@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const counterSlice = createSlice({
+const modalSlice = createSlice({
   name: 'modal',
   initialState: 'none',
   reducers: {
@@ -9,5 +9,5 @@ const counterSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { openModal, closeModal } = modalSlice.actions;
+export default modalSlice.reducer;
