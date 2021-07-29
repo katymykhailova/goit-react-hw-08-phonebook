@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AppBar from 'components/AppBar';
 import { Loader } from 'components//Loader/Loader';
+import { authOperations } from './redux/auth';
 
 // import ContactsView from 'views/ContactsView';
 // import RegisterView from 'views/RegisterView';
@@ -22,6 +25,11 @@ const HomeView = lazy(() =>
 );
 
 export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <>
       <AppBar />
