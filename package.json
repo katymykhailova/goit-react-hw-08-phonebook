@@ -2,7 +2,6 @@
   "name": "goit-react-hw-08-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kotikm81.github.io/goit-react-hw-08-phonebook",
   "dependencies": {
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
@@ -39,7 +38,7 @@
     "prepare": "husky install",
     "api-server": "json-server --port 4040 --delay 100 --watch db.json",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [

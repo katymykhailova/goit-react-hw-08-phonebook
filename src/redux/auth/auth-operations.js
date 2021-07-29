@@ -78,6 +78,7 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
       // TODO: Добавить обработку ошибки error.message
     }
   },

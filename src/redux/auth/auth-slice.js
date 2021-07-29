@@ -30,6 +30,7 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
     },
+    // [authOperations.rejected]: (state, action) => (state.isLoggedIn = false),
   },
 });
 
