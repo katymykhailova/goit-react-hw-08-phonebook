@@ -7,6 +7,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+}
+
+@media screen and (max-width: 680px) {
+  body {
+    font-size: 12px;
+  }
+  
 }
 
 code {
@@ -15,11 +23,20 @@ code {
 }
 
 .nav-link {
-  padding: 0 15px;
+  padding: 0 5px;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
 }
+
+@media screen and (min-width: 680px) {
+  .nav-link {
+    padding: 0 15px;
+    font-size: 24px;
+  }
+    
+}
+
 
 .nav-link:not(:last-child){
   border-right: 1px solid rgba(255, 255, 255, 0.5);

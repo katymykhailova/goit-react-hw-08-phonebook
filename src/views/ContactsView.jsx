@@ -23,7 +23,7 @@ export default function ContactsView() {
   return (
     <Section>
       <Grid container spacing={2}>
-        <Grid item xs>
+        <Grid item xl={4} xs>
           <h2>Filter</h2>
           <div
             style={{
@@ -42,8 +42,8 @@ export default function ContactsView() {
             />
           </div>
         </Grid>
-        <Grid item xs={8}>
-          {isLoadingContacts && (
+        <Grid item xs xl>
+          {isLoadingContacts ? (
             <>
               <Skeleton animation="wave" height={100} />
               <Skeleton animation="wave" height={80} />
@@ -51,8 +51,9 @@ export default function ContactsView() {
               <Skeleton animation="wave" height={80} />
               <Skeleton animation="wave" height={80} />
             </>
+          ) : (
+            <ContactList />
           )}
-          <ContactList />
         </Grid>
       </Grid>
       {openedModal === 'newContact' && (

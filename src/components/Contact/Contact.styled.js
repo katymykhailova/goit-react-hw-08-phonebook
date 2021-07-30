@@ -6,6 +6,9 @@ export const ContactsText = styled.span`
   & svg {
     color: ${({ theme }) => theme.colors.grey};
     margin-right: 10px;
+    @media screen and (max-width: 680px) {
+      display: none;
+    }
   }
 `;
 

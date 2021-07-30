@@ -35,7 +35,7 @@ export default function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    toast.error(error);
+    toast.error(error && 'Invalid Authorization');
   }, [error]);
 
   return (
