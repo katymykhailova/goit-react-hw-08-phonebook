@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { lazy, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+
 import AppBar from 'components/AppBar';
 import { Loader } from 'components//Loader/Loader';
-import { authOperations } from './redux/auth';
+import { authOperations, authSelectors } from './redux/auth';
+import getError from './redux/selectors';
 
-// import ContactsView from 'views/ContactsView';
-// import RegisterView from 'views/RegisterView';
-// import LoginView from 'views/LoginView';
-// import HomeView from 'views/HomeView';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 const ContactsView = lazy(() =>
   import('views/ContactsView.jsx' /* webpackChunkName: "ContactsView" */),
@@ -26,29 +27,46 @@ const HomeView = lazy(() =>
 
 export default function App() {
   const dispatch = useDispatch();
+  const error = useSelector(getError);
+
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
+  useEffect(() => {
+    toast.error(error);
+  }, [error]);
+
   return (
     <>
-      <AppBar />
-      <Suspense fallback={<Loader />}>
-        <Switch>
-          <Route path="/" exact>
-            <HomeView />
-          </Route>
-          <Route path="/contacts" exact>
-            <ContactsView />
-          </Route>
-          <Route path="/register" exact>
-            <RegisterView />
-          </Route>
-          <Route path="/login" exact>
-            <LoginView />
-          </Route>
-        </Switch>
-      </Suspense>
+      {!isFetchingCurrentUser && (
+        <>
+          <AppBar />
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              <PublicRoute exact path="/">
+                <HomeView />
+              </PublicRoute>
+              <PrivateRoute exact path="/contacts" redirectTo="/login">
+                <ContactsView />
+              </PrivateRoute>
+              <PublicRoute exact path="/register" restricted>
+                <RegisterView />
+              </PublicRoute>
+              <PublicRoute
+                exact
+                path="/login"
+                restricted
+                redirectTo="/contacts"
+              >
+                <LoginView />
+              </PublicRoute>
+            </Switch>
+          </Suspense>
+        </>
+      )}
+      <ToastContainer autoClose={3000} />
     </>
   );
 }

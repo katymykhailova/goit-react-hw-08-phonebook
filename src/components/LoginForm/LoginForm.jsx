@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -13,19 +13,12 @@ export default function RegisteForm() {
   };
 
   const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required('Обязательное поле')
-      .email('e-mail введен не корректно'),
+    email: yup.string().required('Обязательное поле'),
     password: yup
       .string()
       .max(10, 'пароль слишком длинный')
       .min(5, 'пароль слишком короткий')
-      .required('Обязательное поле')
-      .matches(
-        /[a-zA-Z0-9-]/,
-        'Пароль может содержать только из латинских букв и цифр и тире',
-      ),
+      .required('Обязательное поле'),
   });
 
   const {

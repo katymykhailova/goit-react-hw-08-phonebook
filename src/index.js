@@ -5,6 +5,8 @@ import { ThemeProvider } from '@emotion/react';
 import store from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './index.css';
 import App from './App';
 
