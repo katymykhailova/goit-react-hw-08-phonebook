@@ -3,7 +3,7 @@ import BarLoader from 'react-spinners/BarLoader';
 import RiseLoader from 'react-spinners/RiseLoader';
 
 const overrideBarLoader = css`
-  top: 65px;
+  top: 85px;
   left: 0;
   position: absolute;
   z-index: 1200;

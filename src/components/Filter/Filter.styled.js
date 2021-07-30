@@ -2,10 +2,11 @@ import { DebounceInput } from 'react-debounce-input';
 import styled from '@emotion/styled/macro';
 
 export const Label = styled.label`
-  width: 100%;
-  max-width: 400px;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 15px;
 `;
 
 export const FilterInput = styled(DebounceInput)`

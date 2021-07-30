@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeFilter, changecurrentContact } from './contacts-actions';
+import {
+  changeNameFilter,
+  changecurrentContact,
+  changeNumberFilter,
+} from './contacts-actions';
 
 import {
   fetchContacts,
@@ -44,9 +48,19 @@ const loading = createReducer(false, {
 //   [changeContact.pending]: () => null,
 // });
 
-const filter = createReducer('', {
-  [changeFilter]: (_, { payload }) => payload,
-});
+const filter = createReducer(
+  { name: '', number: '' },
+  {
+    [changeNameFilter]: (state, { payload }) => ({
+      ...state,
+      name: payload,
+    }),
+    [changeNumberFilter]: (state, { payload }) => ({
+      ...state,
+      number: payload,
+    }),
+  },
+);
 
 const currentContact = createReducer('', {
   [changecurrentContact]: (_, { payload }) => payload,

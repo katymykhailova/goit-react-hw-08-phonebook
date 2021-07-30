@@ -8,10 +8,14 @@ export const getCurrentContact = state => state.contacts.currentContact;
 export const getVisibleContacts = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedNameFilter = filter.name.toLowerCase();
+    const normalizedNumberFilter = filter.number.toLowerCase();
 
     return contacts
-      .filter(({ name }) => name.toLowerCase().includes(normalizedFilter))
+      .filter(({ name }) => name.toLowerCase().includes(normalizedNameFilter))
+      .filter(({ number }) =>
+        number.toLowerCase().includes(normalizedNumberFilter),
+      )
       .sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();

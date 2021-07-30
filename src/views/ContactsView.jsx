@@ -1,51 +1,33 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FiUserPlus } from 'react-icons/fi';
+import Grid from '@material-ui/core/Grid';
 import Section from 'components/Section';
 import ContactList from 'components/ContactList';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
-import Button from 'components/Button';
 import Modal from 'components/Modal';
-import ContainerFilter from 'components/ContainerFilter';
-import { iconSize } from 'constants/index';
-import { modalSelectors, modalActions } from '../redux/modal';
-import {
-  contactsOperations,
-  contactsSelectors,
-  contactsActions,
-} from '../redux/contacts';
+
+import { modalSelectors } from '../redux/modal';
+import { contactsOperations, contactsActions } from '../redux/contacts';
 
 export default function ContactsView() {
   const openedModal = useSelector(modalSelectors.getOpenedModal);
-  const isLoadingContacts = useSelector(contactsSelectors.getLoading);
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (
     <Section>
-      <h1>Phonebook</h1>
-
-      <ContainerFilter>
-        <Filter />
-        <Button
-          type="button"
-          onClick={() => {
-            dispatch(contactsActions.changecurrentContact(''));
-            dispatch(modalActions.openModal('newContact'));
-          }}
-          aria-label="add contact"
-        >
-          <FiUserPlus size={iconSize.small} />
-        </Button>
-      </ContainerFilter>
-
-      <h2>Contacts</h2>
-      {isLoadingContacts && <h3>loading...</h3>}
-
-      <ContactList />
-
+      <Grid container spacing={2}>
+        <Grid item xs>
+          <h2>Filter</h2>
+          <Filter onHandleChange={contactsActions.changeNameFilter} />
+          <Filter onHandleChange={contactsActions.changeNumberFilter} />
+        </Grid>
+        <Grid item xs={8}>
+          <ContactList />
+        </Grid>
+      </Grid>
       {openedModal === 'newContact' && (
         <Modal>
           <ContactForm />
