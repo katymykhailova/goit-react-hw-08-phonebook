@@ -37,17 +37,6 @@ const loading = createReducer(false, {
   [changeContact.rejected]: () => false,
 });
 
-// const error = createReducer(null, {
-//   [fetchContacts.rejected]: (_, { payload }) => payload,
-//   [fetchContacts.pending]: () => null,
-//   [addContact.rejected]: (_, { payload }) => payload,
-//   [addContact.pending]: () => null,
-//   [deleteContact.rejected]: (_, { payload }) => payload,
-//   [deleteContact.pending]: () => null,
-//   [changeContact.rejected]: (_, { payload }) => payload,
-//   [changeContact.pending]: () => null,
-// });
-
 const filter = createReducer(
   { name: '', number: '' },
   {
@@ -70,6 +59,5 @@ export default combineReducers({
   items,
   filter,
   loading,
-  // error,
   currentContact,
 });

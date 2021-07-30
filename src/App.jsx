@@ -5,7 +5,7 @@ import { Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import AppBar from 'components/AppBar';
-import { Loader } from 'components//Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
 import { authOperations, authSelectors } from './redux/auth';
 import getError from './redux/selectors';
 
