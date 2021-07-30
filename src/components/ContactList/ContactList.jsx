@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { FiUserPlus } from 'react-icons/fi';
-
 import Contact from '../Contact';
 import {
   contactsOperations,
@@ -10,7 +9,6 @@ import {
 import { modalActions } from '../../redux/modal';
 import Button from 'components/Button';
 import { iconSize } from 'constants/index';
-
 import { Contacts, ContactsItem, ContactsTitle } from './ContactList.styled';
 
 export default function ContactList() {
@@ -23,21 +21,21 @@ export default function ContactList() {
 
   return (
     <>
+      <ContactsTitle>
+        <h2>Contacts</h2>
+        <Button
+          type="button"
+          onClick={() => {
+            dispatch(contactsActions.changecurrentContact(''));
+            dispatch(modalActions.openModal('newContact'));
+          }}
+          aria-label="add contact"
+        >
+          <FiUserPlus size={iconSize.small} />
+        </Button>
+      </ContactsTitle>
       {contacts.length > 0 && (
         <>
-          <ContactsTitle>
-            <h2>Contacts</h2>
-            <Button
-              type="button"
-              onClick={() => {
-                dispatch(contactsActions.changecurrentContact(''));
-                dispatch(modalActions.openModal('newContact'));
-              }}
-              aria-label="add contact"
-            >
-              <FiUserPlus size={iconSize.small} />
-            </Button>
-          </ContactsTitle>
           <Contacts>
             {contacts.map(({ id, name, number }) => (
               <ContactsItem key={id}>
